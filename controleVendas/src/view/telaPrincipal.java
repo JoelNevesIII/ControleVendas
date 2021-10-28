@@ -31,24 +31,35 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAreaVenda = new javax.swing.JButton();
         btnFuncao = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
         setSize(new java.awt.Dimension(1650, 1080));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Controle de Vendas");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 27, -1, -1));
 
         btnAreaVenda.setText("Areas de venda");
-        btnAreaVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAreaVenda.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnAreaVenda.setVerifyInputWhenFocusTarget(false);
         btnAreaVenda.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnAreaVenda.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         btnAreaVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAreaVendaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAreaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 203, -1, -1));
 
         btnFuncao.setText("Funções");
         btnFuncao.addActionListener(new java.awt.event.ActionListener() {
@@ -56,35 +67,31 @@ public class telaPrincipal extends javax.swing.JFrame {
                 btnFuncaoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 244, 109, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(119, 119, 119))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAreaVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFuncao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAreaVenda)
-                .addGap(18, 18, 18)
-                .addComponent(btnFuncao)
-                .addGap(164, 164, 164))
-        );
+        jButton1.setText("Realizar Venda");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 76, 227, 56));
 
-        pack();
+        jButton2.setText("Cadastrar Cliente");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 162, -1, -1));
+
+        jButton3.setText("Cadastrar Produto");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 244, -1, -1));
+
+        jButton4.setText("Cadastrar Usuario");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 203, -1, -1));
+
+        jButton5.setText("Verificar Nota");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 162, 109, -1));
+
+        setBounds(0, 0, 571, 355);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAreaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaVendaActionPerformed
@@ -98,6 +105,10 @@ public class telaPrincipal extends javax.swing.JFrame {
         telaFuncoe.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnFuncaoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +148,11 @@ public class telaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAreaVenda;
     private javax.swing.JButton btnFuncao;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

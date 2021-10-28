@@ -25,9 +25,10 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
     public telaCadastraFuncao() {
         initComponents();
         
-        try {    
+        try {   
             comboAreaVenda = new Combos(cbAreaVenda);
-            comboAreaVenda.preencheCombo("SELECT nome FROM area_venda");
+            comboAreaVenda.preencheCombo("SELECT id_area, nome FROM area_venda ORDER BY nome");
+            
                        
         }catch (SQLException ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
@@ -48,11 +49,10 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        cbAreaVenda = new javax.swing.JComboBox<>();
         txtFuncao = new javax.swing.JTextField();
         btnCadastrarFuncao = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        cbAreaVenda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,14 +65,6 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
 
         jLabel4.setText("Realizará vendas");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbAreaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAreaVendaActionPerformed(evt);
-            }
-        });
-
         btnCadastrarFuncao.setText("Cadastrar função");
         btnCadastrarFuncao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +76,13 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFecharActionPerformed(evt);
+            }
+        });
+
+        cbAreaVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAreaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAreaVendaActionPerformed(evt);
             }
         });
 
@@ -104,9 +103,7 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbAreaVenda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -127,9 +124,7 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -138,7 +133,7 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarFuncao)
                     .addComponent(btnFechar))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,7 +148,7 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void cbAreaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAreaVendaActionPerformed
-
+        // TODO add your handling code here:
     }//GEN-LAST:event_cbAreaVendaActionPerformed
 
     /**
@@ -195,7 +190,6 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrarFuncao;
     private javax.swing.JButton btnFechar;
     private javax.swing.JComboBox<String> cbAreaVenda;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
