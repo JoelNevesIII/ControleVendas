@@ -33,7 +33,7 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtAreaVenda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCadastraAreaVenda = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,10 +43,10 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
 
         jLabel2.setText("Nome da área");
 
-        jButton1.setText("Cadastrar area de venda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastraAreaVenda.setText("Cadastrar area de venda");
+        btnCadastraAreaVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadastraAreaVendaActionPerformed(evt);
             }
         });
 
@@ -75,7 +75,7 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAreaVenda))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnCadastraAreaVenda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnVoltar)))))
                 .addGap(36, 36, 36))
@@ -91,7 +91,7 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
                     .addComponent(txtAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnCadastraAreaVenda)
                     .addComponent(btnVoltar))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
@@ -99,12 +99,12 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCadastraAreaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraAreaVendaActionPerformed
         String area = txtAreaVenda.getText();
         controller.controllerAreaVenda controller = new controllerAreaVenda();
         boolean cadastrado = controller.CadastraAreaVenda(area);
         txtAreaVenda.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCadastraAreaVendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
@@ -146,8 +146,8 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastraAreaVenda;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtAreaVenda;

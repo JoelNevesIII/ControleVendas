@@ -32,9 +32,9 @@ public class telaPrincipal extends javax.swing.JFrame {
         btnAreaVenda = new javax.swing.JButton();
         btnFuncao = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        btnProduto = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,55 +43,70 @@ public class telaPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1650, 1080));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Controle de Vendas");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 27, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
+        btnAreaVenda.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         btnAreaVenda.setText("Areas de venda");
-        btnAreaVenda.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnAreaVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAreaVenda.setVerifyInputWhenFocusTarget(false);
-        btnAreaVenda.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnAreaVenda.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         btnAreaVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAreaVendaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAreaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 203, -1, -1));
+        getContentPane().add(btnAreaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 240, 60));
 
+        btnFuncao.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         btnFuncao.setText("Funções");
         btnFuncao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFuncaoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 244, 109, -1));
+        getContentPane().add(btnFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 240, 60));
 
+        jButton1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
         jButton1.setText("Realizar Venda");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 76, 227, 56));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 670, 70));
 
-        jButton2.setText("Cadastrar Cliente");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 162, -1, -1));
-
-        jButton3.setText("Cadastrar Produto");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 244, -1, -1));
-
-        jButton4.setText("Cadastrar Usuario");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCliente.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 203, -1, -1));
+        getContentPane().add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 240, 240, 60));
 
+        btnProduto.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        btnProduto.setText("Produtos");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 420, 240, 60));
+
+        btnUsuario.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        btnUsuario.setText("Usuario");
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 330, 240, 60));
+
+        jButton5.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         jButton5.setText("Verificar Nota");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 162, 109, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, 60));
 
-        setBounds(0, 0, 571, 355);
+        setBounds(0, 0, 1301, 637);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAreaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaVendaActionPerformed
@@ -106,9 +121,23 @@ public class telaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnFuncaoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+        telaUsuario telaUsuario = new telaUsuario();
+        telaUsuario.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnUsuarioActionPerformed
+
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        telaProduto tela = new telaProduto();
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnProdutoActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        telaCliente telaCliente = new telaCliente();
+        telaCliente.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,11 +176,11 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAreaVenda;
+    private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFuncao;
+    private javax.swing.JButton btnProduto;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

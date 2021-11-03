@@ -126,8 +126,7 @@ public class telaLogin extends javax.swing.JFrame {
             }
             
         }catch(Exception ex){
-            CaixaDeDialogo.obterinstancia()
-                    .exibirMensagem(ex.getMessage(), "Erro", 'e');
+            CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), "Erro", 'e');
         }
     }//GEN-LAST:event_btnAcessarActionPerformed
 
