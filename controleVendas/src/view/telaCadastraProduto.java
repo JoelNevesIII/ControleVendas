@@ -47,8 +47,6 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        cbControlaEstoque = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtEstMax = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -64,6 +62,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         txtValorCusto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtValorVenda = new javax.swing.JTextField();
+        chbEstoque = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,15 +78,6 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantidadeActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Controla estoque");
-
-        cbControlaEstoque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Sim", "Não" }));
-        cbControlaEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbControlaEstoqueActionPerformed(evt);
             }
         });
 
@@ -126,6 +116,19 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         });
 
         jLabel12.setText("Valor de venda");
+
+        chbEstoque.setText("Controla Estoque");
+        chbEstoque.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chbEstoque.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chbEstoqueStateChanged(evt);
+            }
+        });
+        chbEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbEstoqueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,21 +180,17 @@ public class telaCadastraProduto extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel12)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtValorVenda)
-                                                    .addComponent(cbControlaEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(chbEstoque, javax.swing.GroupLayout.Alignment.LEADING)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel10)
-                                                    .addComponent(jLabel7))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtEstMin)
-                                                    .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel7))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtEstMin)
+                                            .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addComponent(btnCadastrarProduto)))
@@ -225,8 +224,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(cbControlaEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(chbEstoque))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEstMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,7 +243,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarProduto)
                     .addComponent(btnFechar))
@@ -268,7 +266,13 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         String comissao = txtComissao.getText();
         String valorVenda = txtValorVenda.getText();
         String valorCusto = txtValorCusto.getText();
-        String controlaEst = (String) cbControlaEstoque.getSelectedItem();
+        boolean controlaEst;
+        if(chbEstoque.isSelected()){
+            controlaEst = true;
+        }else{
+            controlaEst = false;
+        }
+        
         int areaVenda = (int) cbAreaVenda.getSelectedIndex();
         
         controller.controllerProduto controller = new controllerProduto();
@@ -281,13 +285,25 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
-    private void cbControlaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbControlaEstoqueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbControlaEstoqueActionPerformed
-
     private void txtValorCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorCustoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorCustoActionPerformed
+
+    private void chbEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbEstoqueActionPerformed
+
+    private void chbEstoqueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chbEstoqueStateChanged
+        if(chbEstoque.isSelected()){
+            txtEstMax.setEnabled(true);
+            txtEstMin.setEnabled(true);
+        }else{
+            txtEstMax.setText("");
+            txtEstMin.setText("");
+            txtEstMax.setEnabled(false);
+            txtEstMin.setEnabled(false);
+        }
+    }//GEN-LAST:event_chbEstoqueStateChanged
 
     /**
      * @param args the command line arguments
@@ -328,7 +344,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrarProduto;
     private javax.swing.JButton btnFechar;
     private javax.swing.JComboBox<String> cbAreaVenda;
-    private javax.swing.JComboBox<String> cbControlaEstoque;
+    private javax.swing.JCheckBox chbEstoque;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -336,7 +352,6 @@ public class telaCadastraProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

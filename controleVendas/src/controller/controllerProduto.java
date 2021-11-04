@@ -14,7 +14,7 @@ import tools.CaixaDeDialogo;
  */
 public class controllerProduto {
     
-    public boolean cadastraProduto(int areaVenda, String produto, String descricao, String quantidade, String estMax, String estMin, String controlaEst, String comissao, String valorVenda, String valorCusto){
+    public boolean cadastraProduto(int areaVenda, String produto, String descricao, String quantidade, String estMax, String estMin, boolean controlaEst, String comissao, String valorVenda, String valorCusto){
         try{
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
@@ -51,10 +51,7 @@ public class controllerProduto {
             }
             
             //Define se controla estoque
-            if(controlaEst.equals("Selecione")){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Defina se irá ser realizado controle de estoque");
-            }
-            if(controlaEst.equals("Não")){
+            if(controlaEst = false){
                 stmt.setNull(5, 0);
                 stmt.setNull(6, 0);
                 stmt.setBoolean(7, false);

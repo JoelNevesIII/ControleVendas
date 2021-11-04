@@ -15,20 +15,38 @@ import tools.Combos;
  * @author Joel
  */
 public class telaCadastraEndereco extends javax.swing.JFrame {
-
-    public telaCadastraEndereco() {
-        initComponents();
         Combos comboestados;
         Combos comboCidade;
+    public telaCadastraEndereco() {
+        initComponents();
+        
         try {   
-            comboestados = new Combos(cbEstado);
-            comboestados.preencheCombo("SELECT id_estado, nome_estado FROM estado ORDER BY nome_estado"); 
             
+            preencheEstado();
+            preencheCidades(); 
+        }catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
+        }
+    }
+    
+    private void preencheCidades(){
+        try {         
             comboCidade = new Combos(cbCidade);
             comboCidade.preencheCombo("SELECT id_cidade, nome FROM cidade ORDER BY nome"); 
         }catch (SQLException ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
         }
+        
+    }
+    
+    private void preencheEstado(){
+          try {         
+        comboestados = new Combos(cbEstado);
+        comboestados.preencheCombo("SELECT id_estado, nome_estado FROM estado ORDER BY nome_estado");
+        }catch (SQLException ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
+        }
+ 
     }
 
     /**
@@ -229,6 +247,7 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
         String uf = txtUF.getText();
         controller.controllerCliente controller = new controllerCliente();
         boolean cadastraCliente = controller.cadastraEstado(estado, uf);
+        preencheEstado();
     }//GEN-LAST:event_btnCadastraEstadoActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -241,17 +260,21 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
 
     private void btnCadastraCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraCidadeActionPerformed
         String cidade = txtCidade.getText();
-        int uf = (int) cbEstado.getSelectedIndex();        
+        Combos uf =  (Combos) cbEstado.getSelectedItem();
+        int idestado = Integer.parseInt(uf.getCodigo());        
         controller.controllerCliente controller = new controllerCliente(); 
-        boolean controllerCliente = controller.cadastraCidade(cidade, uf);
+        boolean controllerCliente = controller.cadastraCidade(cidade, idestado);
+        preencheCidades(); 
+
     }//GEN-LAST:event_btnCadastraCidadeActionPerformed
 
     private void btnCadastraBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraBairroActionPerformed
         String bairro = txtBairro.getText();
-        int cidade = cbCidade.getSelectedIndex();
-CaixaDeDialogo.obterinstancia().exibirMensagem(cidade + "");        
+        Combos cidade =  (Combos) cbCidade.getSelectedItem();
+        int idCidade = Integer.parseInt(cidade.getCodigo());
+            
         controller.controllerCliente controller = new controllerCliente(); 
-        boolean controllerCliente = controller.cadastraBairro(bairro, cidade);
+        boolean controllerCliente = controller.cadastraBairro(bairro, idCidade);
     }//GEN-LAST:event_btnCadastraBairroActionPerformed
 
     /**
