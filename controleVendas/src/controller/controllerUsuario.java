@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import tools.CaixaDeDialogo;
+import model.modelUsuario;
 
 /**
  *
@@ -45,7 +46,7 @@ public class controllerUsuario {
         }    
     }
     
-    public boolean cadastraUsuario(String usuario, String senha, int funcao){
+    public boolean cadastraUsuario(modelUsuario usuario){
     try{
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
@@ -55,24 +56,24 @@ public class controllerUsuario {
             stmt = con.prepareStatement(wSQL);
              
             //Define Usuario
-            if(usuario.equals("")){
+            if(usuario.getNome().equals("")){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Define um usuario");
             }else{
-                stmt.setString(1, usuario);
+                stmt.setString(1, usuario.getNome());
             }
             
             //Define Senha
-            if(senha.equals("")){
+            if(usuario.getSenha().equals("")){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Defina uma senha");
             }else{
-                stmt.setString(2, senha);
+                stmt.setString(2, usuario.getSenha());
             }
             
             //Define Funcao
-            if(funcao == 0){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Defina uma função");
+            if(usuario.getId_funcao() != 0){
+                stmt.setInt(3, usuario.getId_funcao());   
             }else{
-                stmt.setInt(3, funcao);
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Defina uma função");
             }
 
             stmt.executeUpdate();

@@ -6,6 +6,7 @@
 package view;
 
 import controller.controllerAreaVenda;
+import model.modelAreaVenda;
 import tools.CaixaDeDialogo;
 
 /**
@@ -35,6 +36,8 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
         txtAreaVenda = new javax.swing.JTextField();
         btnCadastraAreaVenda = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtAviso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +60,8 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
             }
         });
 
+        txtAviso.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,9 +80,16 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAreaVenda))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCadastraAreaVenda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVoltar)))))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtAviso)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCadastraAreaVenda)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnVoltar)))))))
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
@@ -89,21 +101,34 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAviso)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastraAreaVenda)
                     .addComponent(btnVoltar))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraAreaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraAreaVendaActionPerformed
-        String area = txtAreaVenda.getText();
-        controller.controllerAreaVenda controller = new controllerAreaVenda();
-        boolean cadastrado = controller.CadastraAreaVenda(area);
-        txtAreaVenda.setText("");
+        if(txtAreaVenda.getText().equals("")){
+            txtAviso.setText("Insira uma Area de venda");
+        }else{
+            modelAreaVenda area = new modelAreaVenda();
+            area.setNome(txtAreaVenda.getText().trim());
+            controller.controllerAreaVenda controller = new controllerAreaVenda();
+            boolean cadastrado = controller.CadastraAreaVenda(area);
+            txtAviso.setText("Area de venda cadastrada");
+            txtAreaVenda.setText("");
+        } 
     }//GEN-LAST:event_btnCadastraAreaVendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -150,6 +175,8 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtAreaVenda;
+    private javax.swing.JLabel txtAviso;
     // End of variables declaration//GEN-END:variables
 }

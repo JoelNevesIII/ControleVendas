@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import tools.CaixaDeDialogo;
 import controller.controllerFuncao;
 import tools.Combos;
+import model.modelFuncao;
 
 
 /**
@@ -49,12 +50,11 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtFuncao = new javax.swing.JTextField();
         btnCadastrarFuncao = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
         cbAreaVenda = new javax.swing.JComboBox<>();
-        cbRealizaVenda = new javax.swing.JComboBox<>();
+        chRealizaraVendas = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,8 +64,6 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
         jLabel2.setText("Função");
 
         jLabel3.setText("Area de Venda");
-
-        jLabel4.setText("Realizará vendas");
 
         txtFuncao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,36 +92,37 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
             }
         });
 
-        cbRealizaVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Sim", "Não" }));
+        chRealizaraVendas.setText("Realizará vendas");
+        chRealizaraVendas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbRealizaVenda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbAreaVenda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chRealizaraVendas)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCadastrarFuncao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                                .addComponent(btnFechar)))))
+                                .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 107, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCadastrarFuncao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar)
+                        .addGap(34, 34, 34))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel1)
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -137,31 +136,37 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
                     .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbRealizaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbAreaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chRealizaraVendas)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarFuncao)
                     .addComponent(btnFechar))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncaoActionPerformed
-        String funcao = txtFuncao.getText();
-        String realizaVenda = (String) cbRealizaVenda.getSelectedItem();
-        int areaVenda = (int) cbAreaVenda.getSelectedIndex();
+        modelFuncao funcao = new modelFuncao();
+        funcao.setFuncao(txtFuncao.getText());
+        
+        Combos area = (Combos) cbAreaVenda.getSelectedItem();
+        int id_area = Integer.parseInt(area.getCodigo());
+        funcao.setArea_venda(id_area);
+        
+        if(chRealizaraVendas.isSelected()){
+            funcao.setFuncao_venda(true);
+        }else{
+            funcao.setFuncao_venda(false);   
+        } 
+        
         controller.controllerFuncao controller = new controllerFuncao();
-        boolean cadastraFuncao = controller.CadastraFuncao(funcao, realizaVenda, areaVenda);
+        boolean cadastraFuncao = controller.CadastraFuncao(funcao);
                 
-        txtFuncao.setText("");
-        CaixaDeDialogo.obterinstancia().exibirMensagem(funcao + "\n" + realizaVenda + "\n" + areaVenda);
         
     }//GEN-LAST:event_btnCadastrarFuncaoActionPerformed
 
@@ -216,11 +221,10 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrarFuncao;
     private javax.swing.JButton btnFechar;
     private javax.swing.JComboBox<String> cbAreaVenda;
-    private javax.swing.JComboBox<String> cbRealizaVenda;
+    private javax.swing.JCheckBox chRealizaraVendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtFuncao;
     // End of variables declaration//GEN-END:variables
 }

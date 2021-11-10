@@ -11,6 +11,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import tools.CaixaDeDialogo;
 import tools.Combos;
+import controller.controllerCliente;
+import model.modelCliente;
 
 /**
  *
@@ -21,15 +23,24 @@ public class telaCadastraCliente extends javax.swing.JFrame {
         Combos comboestados;
         Combos comboCidade;
         Combos comboBairro;
-
+        modelCliente cliente = new modelCliente();
+        
     public telaCadastraCliente() {
         initComponents();
         txtNumero.setDocument(new controllerNumeros());
         txtCpf.setDocument(new controllerNumeros());
         txtCnpj.setDocument(new controllerNumeros());
+        RCpf.setSelected(true);
+        if(RCpf.isSelected() == true){
+            txtCnpj.setText("");
+            txtCnpj.setEnabled(false);
+            txtCpf.setEnabled(true);
+            cliente.setCpf_cnpj("CPF");
+        }else{
+            txtCnpj.setEnabled(true);
+        }       
         
-        try {   
-            
+        try {    
             preencheEstado();
             preencheCidades(0);
             preencheBairro(0);
@@ -37,7 +48,7 @@ public class telaCadastraCliente extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
         }
     }
-        private void preencheCidades(int estado){
+    private void preencheCidades(int estado){
         try {         
             comboCidade = new Combos(cbCidade);
             comboCidade.preencheCombo("SELECT id_cidade, nome FROM cidade where id_estado = "+estado+" ORDER BY nome"); 
@@ -260,11 +271,34 @@ public class telaCadastraCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraClienteActionPerformed
-        String nome = txtNome.getText();
-        String rua = txtRua.getText();
-        String numero = txtNumero.getText();
-        
-        CaixaDeDialogo.obterinstancia().exibirMensagem(nome + "\n" + rua + "\n" + numero);
+        try{ 
+            
+            cliente.setNome(txtNome.getText()); 
+            
+            Combos bairro = (Combos) cbBairro.getSelectedItem();
+            int id_bairro = Integer.parseInt(bairro.getCodigo());
+            cliente.setId_bairro(id_bairro);
+
+            Combos cidade = (Combos) cbCidade.getSelectedItem();
+            int id_cidade = Integer.parseInt(cidade.getCodigo());
+            cliente.setId_cidade(id_cidade);
+
+            Combos estado = (Combos) cbEstado.getSelectedItem();
+            int id_estado = Integer.parseInt(estado.getCodigo());
+            cliente.setId_estado(id_estado);
+
+            cliente.setRua(txtRua.getText());
+            cliente.setNumero(txtNumero.getText());
+
+            cliente.setCpf(txtCpf.getText());
+
+            cliente.setCnpj(txtCnpj.getText());
+            
+            controller.controllerCliente controller = new controllerCliente();
+            boolean cadastraCliente = controller.cadastraCliente(cliente);
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_btnCadastraClienteActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -272,10 +306,12 @@ public class telaCadastraCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void RCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RCpfActionPerformed
-       if(RCpf.isSelected() == true){
+       
+        if(RCpf.isSelected() == true){
             txtCnpj.setText("");
             txtCnpj.setEnabled(false);
             txtCpf.setEnabled(true);
+            cliente.setCpf_cnpj("CPF");
        }else{
             txtCnpj.setEnabled(true);
        }       
@@ -290,8 +326,10 @@ public class telaCadastraCliente extends javax.swing.JFrame {
             txtCpf.setText("");
             txtCpf.setEnabled(false);
             txtCnpj.setEnabled(true);
+            cliente.setCpf_cnpj("CNPJ");
+
        }else{
-            txtCpf.setEnabled(true);
+            txtCpf.setEnabled(false);
        }
     }//GEN-LAST:event_RCnpjActionPerformed
 
@@ -314,41 +352,6 @@ public class telaCadastraCliente extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_cbCidadeItemStateChanged
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaCadastraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaCadastraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaCadastraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaCadastraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new telaCadastraCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton RCnpj;

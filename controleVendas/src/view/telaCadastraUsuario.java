@@ -10,6 +10,7 @@ import controller.controllerUsuario;
 import java.sql.SQLException;
 import tools.CaixaDeDialogo;
 import tools.Combos;
+import model.modelUsuario;
 
 /**
  *
@@ -133,13 +134,16 @@ public class telaCadastraUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraUsuarioActionPerformed
-        String usuario = txtUsuario.getText();
-        String senha = txtSenha.getText();
-        int funcao = cbFuncao.getSelectedIndex();
+
+        modelUsuario usuario = new modelUsuario();
+        usuario.setNome(txtUsuario.getText().trim());
+        usuario.setSenha(txtSenha.getText());
+        Combos funcao = (Combos) cbFuncao.getSelectedItem();
+        int id_funcao = Integer.parseInt(funcao.getCodigo());
+        usuario.setId_funcao(id_funcao);
         
         controller.controllerUsuario controller = new controllerUsuario();
-        boolean cadastraUsuario = controller.cadastraUsuario(usuario, senha, funcao);
-        CaixaDeDialogo.obterinstancia().exibirMensagem(usuario  + "\n" + senha + "\n" + funcao);
+        boolean cadastraUsuario = controller.cadastraUsuario(usuario);
     }//GEN-LAST:event_btnCadastraUsuarioActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
