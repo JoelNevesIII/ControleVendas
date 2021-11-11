@@ -27,12 +27,12 @@ public class controllerFuncao {
             String wSQL = "insert into funcao values (default, ?, ?, ?)";
             stmt = con.prepareStatement(wSQL);
             stmt.setString(1, funcao.getFuncao());
-            
-            if(funcao.isFuncao_venda()){
-                stmt.setBoolean(2, true);
+            stmt.setBoolean(2, funcao.isFuncao_venda());
+            if(funcao.getArea_venda() == 0){
+                stmt.setNull(3, 0);
+            }else{
                 stmt.setInt(3, funcao.getArea_venda());
             }
-            CaixaDeDialogo.obterinstancia().exibirMensagem("" + funcao.isFuncao_venda() + "\n" + funcao.getFuncao() + "\n" + funcao.getArea_venda());
             stmt.executeUpdate();
             return rs.next();           
         }catch(SQLException ex){

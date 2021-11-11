@@ -29,8 +29,24 @@ public class telaCadastraUsuario extends javax.swing.JFrame {
             comboFuncao.preencheCombo("SELECT id_funcao, funcao FROM funcao ORDER BY funcao");                
         }catch (SQLException ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
+        }   
+    }
+    private boolean validardados(){  
+        String erro = "";
+        if(txtUsuario.getText().trim().equals("")){
+            erro += "Defina um usuario \n";
         }
-        
+        if(txtSenha.getText().trim().equals("")){
+            erro += "Defina uma Senha \n";
+        }
+        if(cbFuncao.getSelectedIndex() <= 0){
+            erro += "Defina uma funcao \n";
+        }
+        if(erro != ""){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("" + erro);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -134,16 +150,21 @@ public class telaCadastraUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraUsuarioActionPerformed
-
-        modelUsuario usuario = new modelUsuario();
-        usuario.setNome(txtUsuario.getText().trim());
-        usuario.setSenha(txtSenha.getText());
-        Combos funcao = (Combos) cbFuncao.getSelectedItem();
-        int id_funcao = Integer.parseInt(funcao.getCodigo());
-        usuario.setId_funcao(id_funcao);
-        
-        controller.controllerUsuario controller = new controllerUsuario();
-        boolean cadastraUsuario = controller.cadastraUsuario(usuario);
+        try{
+        if(validardados() == true){
+            modelUsuario usuario = new modelUsuario();
+            usuario.setNome(txtUsuario.getText().trim());
+            usuario.setSenha(txtSenha.getText());
+            Combos funcao = (Combos) cbFuncao.getSelectedItem();
+            int id_funcao = Integer.parseInt(funcao.getCodigo());
+            usuario.setId_funcao(id_funcao);
+            
+            controller.controllerUsuario controller = new controllerUsuario();
+            boolean cadastraUsuario = controller.cadastraUsuario(usuario);
+        }
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_btnCadastraUsuarioActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed

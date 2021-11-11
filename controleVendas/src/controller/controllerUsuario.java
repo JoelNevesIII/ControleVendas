@@ -54,27 +54,10 @@ public class controllerUsuario {
 
             String wSQL = "INSERT INTO usuario VALUES (default, ?, ?, ?)";
             stmt = con.prepareStatement(wSQL);
-             
-            //Define Usuario
-            if(usuario.getNome().equals("")){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Define um usuario");
-            }else{
-                stmt.setString(1, usuario.getNome());
-            }
-            
-            //Define Senha
-            if(usuario.getSenha().equals("")){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Defina uma senha");
-            }else{
-                stmt.setString(2, usuario.getSenha());
-            }
-            
-            //Define Funcao
-            if(usuario.getId_funcao() != 0){
-                stmt.setInt(3, usuario.getId_funcao());   
-            }else{
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Defina uma função");
-            }
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getSenha());
+            stmt.setInt(3, usuario.getId_funcao());   
 
             stmt.executeUpdate();
             return rs.next();

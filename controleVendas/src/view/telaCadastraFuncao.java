@@ -152,17 +152,16 @@ public class telaCadastraFuncao extends javax.swing.JFrame {
 
     private void btnCadastrarFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncaoActionPerformed
         modelFuncao funcao = new modelFuncao();
-        funcao.setFuncao(txtFuncao.getText());
-        
-        Combos area = (Combos) cbAreaVenda.getSelectedItem();
-        int id_area = Integer.parseInt(area.getCodigo());
-        funcao.setArea_venda(id_area);
-        
-        if(chRealizaraVendas.isSelected()){
+        funcao.setFuncao(txtFuncao.getText());   
+        if(chRealizaraVendas.isSelected() == true){
             funcao.setFuncao_venda(true);
+            Combos area = (Combos) cbAreaVenda.getSelectedItem();
+            int id_area = Integer.parseInt(area.getCodigo());
+            funcao.setArea_venda(id_area);
         }else{
-            funcao.setFuncao_venda(false);   
-        } 
+            funcao.setFuncao_venda(false);
+            
+        }
         
         controller.controllerFuncao controller = new controllerFuncao();
         boolean cadastraFuncao = controller.CadastraFuncao(funcao);

@@ -48,6 +48,33 @@ public class telaCadastraCliente extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
         }
     }
+    private boolean validardados(){  
+        String erro = "";
+        if(txtNome.getText().trim().equals("")){
+            erro += "Defina um nome \n";
+        }
+        if(cbCidade.getSelectedIndex() <= 0 || cbEstado.getSelectedIndex() <= 0 || cbBairro.getSelectedIndex() <= 0){
+            erro += "Defina um endereço valido \n";
+        }
+        if(txtRua.getText().trim().equals("")){
+            erro += "Defina uma rua \n";
+        }
+        if(txtNumero.getText().trim().equals("")){
+            erro += "Defina um número da residencia \n";
+        }
+        if(txtCpf.getText().trim().equals("") && RCpf.isSelected()){
+            erro += "Defina o CPF \n";
+        }
+        if(txtCnpj.getText().trim().equals("") && RCnpj.isSelected()){
+            erro += "Defina o CNPJ \n";
+        }
+        if(erro != ""){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("" + erro);
+            return false;
+        }
+            return true;      
+    }
+    
     private void preencheCidades(int estado){
         try {         
             comboCidade = new Combos(cbCidade);
@@ -272,28 +299,29 @@ public class telaCadastraCliente extends javax.swing.JFrame {
 
     private void btnCadastraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraClienteActionPerformed
         try{ 
-            
-            cliente.setNome(txtNome.getText()); 
-            
-            Combos bairro = (Combos) cbBairro.getSelectedItem();
-            int id_bairro = Integer.parseInt(bairro.getCodigo());
-            cliente.setId_bairro(id_bairro);
+            if(validardados() == true){
+                cliente.setNome(txtNome.getText()); 
+                
+                Combos bairro = (Combos) cbBairro.getSelectedItem();
+                int id_bairro = Integer.parseInt(bairro.getCodigo());
+                cliente.setId_bairro(id_bairro);
 
-            Combos cidade = (Combos) cbCidade.getSelectedItem();
-            int id_cidade = Integer.parseInt(cidade.getCodigo());
-            cliente.setId_cidade(id_cidade);
+                Combos cidade = (Combos) cbCidade.getSelectedItem();
+                int id_cidade = Integer.parseInt(cidade.getCodigo());
+                cliente.setId_cidade(id_cidade);
 
-            Combos estado = (Combos) cbEstado.getSelectedItem();
-            int id_estado = Integer.parseInt(estado.getCodigo());
-            cliente.setId_estado(id_estado);
-
-            cliente.setRua(txtRua.getText());
-            cliente.setNumero(txtNumero.getText());
-
-            cliente.setCpf(txtCpf.getText());
-
-            cliente.setCnpj(txtCnpj.getText());
-            
+                Combos estado = (Combos) cbEstado.getSelectedItem();
+                int id_estado = Integer.parseInt(estado.getCodigo());
+                cliente.setId_estado(id_estado);
+                
+                cliente.setRua(txtRua.getText());
+                
+                cliente.setNumero(txtNumero.getText());
+                
+                 cliente.setCpf(txtCpf.getText());
+                 cliente.setCnpj(txtCnpj.getText());
+            }
+               
             controller.controllerCliente controller = new controllerCliente();
             boolean cadastraCliente = controller.cadastraCliente(cliente);
         }catch(Exception e){

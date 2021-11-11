@@ -7,6 +7,9 @@ package view;
 
 import controller.controllerCliente;
 import java.sql.SQLException;
+import model.modelBairro;
+import model.modelCidade;
+import model.modelEstado;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -28,7 +31,38 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
         }
     }
-    
+    private boolean validardados(int identificacao){  
+        String erro = "";
+        if(identificacao == 1){
+            if(txtUF.getText().trim().equals("")){
+                erro += "Defina uma UF \n";
+            }
+            if(txtEstado.getText().trim().equals("")){
+                erro += "Defina o estado \n";
+            }
+        }
+        if(identificacao == 2){
+            if(txtCidade.getText().trim().equals("")){
+                erro+= "Deifina a cidade \n";
+            }
+            if(cbEstado.getSelectedIndex() <= 0){
+                erro += "Defina um estado \n";
+            }
+        }
+        if(identificacao == 3){
+            if(txtBairro.getText().trim().equals("")){
+                erro+= "Deifina o Bairro \n";
+            }
+            if(cbCidade.getSelectedIndex() <= 0){
+                erro += "Defina uma cidade \n";
+            }
+        }
+        if(erro != ""){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("" + erro);
+            return false;
+        }
+        return true;
+    }
     private void preencheCidades(){
         try {         
             comboCidade = new Combos(cbCidade);
@@ -243,11 +277,14 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraEstadoActionPerformed
-        String estado = txtEstado.getText();
-        String uf = txtUF.getText();
-        controller.controllerCliente controller = new controllerCliente();
-        boolean cadastraCliente = controller.cadastraEstado(estado, uf);
-        preencheEstado();
+        if(validardados(1) == true){
+            modelEstado estado = new modelEstado();
+            estado.setNome_estado(txtEstado.getText());
+            estado.setUf(txtUF.getText());
+            controller.controllerCliente controller = new controllerCliente();
+            boolean cadastraCliente = controller.cadastraEstado(estado);
+            preencheEstado();
+        }
     }//GEN-LAST:event_btnCadastraEstadoActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -259,22 +296,29 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCidadeActionPerformed
 
     private void btnCadastraCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraCidadeActionPerformed
-        String cidade = txtCidade.getText();
-        Combos uf =  (Combos) cbEstado.getSelectedItem();
-        int idestado = Integer.parseInt(uf.getCodigo());        
-        controller.controllerCliente controller = new controllerCliente(); 
-        boolean controllerCliente = controller.cadastraCidade(cidade, idestado);
-        preencheCidades(); 
-
+        modelCidade cidade = new modelCidade();
+        if(validardados(2) == true){
+            cidade.setNome(txtCidade.getText());
+            Combos uf =  (Combos) cbEstado.getSelectedItem();
+            int idestado = Integer.parseInt(uf.getCodigo());   
+            cidade.setId_estado(idestado);
+            controller.controllerCliente controller = new controllerCliente(); 
+            boolean controllerCliente = controller.cadastraCidade(cidade);
+            preencheCidades(); 
+        }
     }//GEN-LAST:event_btnCadastraCidadeActionPerformed
 
     private void btnCadastraBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraBairroActionPerformed
-        String bairro = txtBairro.getText();
-        Combos cidade =  (Combos) cbCidade.getSelectedItem();
-        int idCidade = Integer.parseInt(cidade.getCodigo());
-            
-        controller.controllerCliente controller = new controllerCliente(); 
-        boolean controllerCliente = controller.cadastraBairro(bairro, idCidade);
+        modelBairro bairro = new modelBairro();
+        if(validardados(3) == true){
+            bairro.setNome(txtBairro.getText());
+            Combos cidade =  (Combos) cbCidade.getSelectedItem();
+            int idCidade = Integer.parseInt(cidade.getCodigo());
+            bairro.setId_cidade(idCidade);
+
+            controller.controllerCliente controller = new controllerCliente(); 
+            boolean controllerCliente = controller.cadastraBairro(bairro);
+        }
     }//GEN-LAST:event_btnCadastraBairroActionPerformed
 
     /**
