@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import tools.CaixaDeDialogo;
 import model.modelFuncao;
+import model.modelAtribuifuncao;
+import model.modelAtribuifuncao;
 
 
 
@@ -38,6 +40,27 @@ public class controllerFuncao {
         }catch(SQLException ex){
             System.out.println("ERRO de SQL: " + ex.getMessage());
             return false;
+        }
+        catch (Exception e) {
+           System.out.println("ERRO: " + e.getMessage());
+           return false;
+        }    
+    }
+    public boolean atribuiFuncao(modelAtribuifuncao funcao){
+
+       try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            String wSQL = "UPDATE usuario SET id_funcao = ? WHERE id_usuario = ?";
+            stmt = con.prepareStatement(wSQL);
+            stmt.setInt(1 , funcao.getId_funcao());
+            stmt.setInt(2, funcao.getId_usuario());
+            
+            stmt.executeUpdate();
+            return true;
+
         }
         catch (Exception e) {
            System.out.println("ERRO: " + e.getMessage());

@@ -8,6 +8,7 @@ package view;
 import controller.controllerNumeros;
 import controller.controllerProduto;
 import java.sql.SQLException;
+import model.modelProduto;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 
@@ -20,6 +21,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
     /**
      * Creates new form telaCadastraProduto
      */
+    modelProduto produto = new modelProduto();
     public telaCadastraProduto() {
         initComponents();
         txtQuantidade.setDocument(new controllerNumeros());
@@ -29,12 +31,57 @@ public class telaCadastraProduto extends javax.swing.JFrame {
         txtValorVenda.setDocument(new controllerNumeros());
         txtValorCusto.setDocument(new controllerNumeros());
         Combos comboAreaVenda;
+        
         try {   
             comboAreaVenda = new Combos(cbAreaVenda);
             comboAreaVenda.preencheCombo("SELECT id_area, nome FROM area_venda ORDER BY nome");                
         }catch (SQLException ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no init");
         }
+    }
+    private boolean validardados(){  
+        String erro = "";
+        if(txtProduto.getText().trim().equals("")){
+            erro += "Defina um nome \n";
+        }
+        if(txtDescricao.getText().trim().equals("")){
+            erro += "Defina uma descrição \n";
+        }
+        if(txtQuantidade.getText().trim().equals("")){
+            erro += "Defina uma quantidade \n";
+        }
+        if(txtProduto.getText().trim().equals("")){
+            erro += "Defina um nome \n";
+        }
+        if(chbEstoque.isSelected()){
+            if(txtEstMax.getText().trim().equals("")){
+            erro += "Defina um estoque maximo\n";
+            }
+            if(txtEstMin.getText().trim().equals("")){
+            erro += "Defina um estoque minimo \n";
+            }
+        }else{
+            txtEstMax.setText("0");
+            txtEstMin.setText("0");
+        }
+        if(txtComissao.getText().trim().equals("")){
+            txtComissao.setText("0");
+        }
+        if(txtValorVenda.getText().trim().equals("")){
+            erro += "Defina um valor de venda \n";
+        }
+        if(txtValorCusto.getText().trim().equals("")){
+            erro += "Defina um valor de custo \n";
+        }
+        if(cbAreaVenda.getSelectedIndex() <= 0){
+            erro += "Defina uma area de venda\n";
+        }
+        if(erro != ""){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("" + erro);
+            return false;
+        }
+        return true;
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -258,27 +305,29 @@ public class telaCadastraProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutoActionPerformed
-        String produto = txtProduto.getText();
-        String descricao = txtDescricao.getText();
-        String quantidade = txtQuantidade.getText();
-        String estMax = txtEstMax.getText();
-        String estMin = txtEstMin.getText();
-        String comissao = txtComissao.getText();
-        String valorVenda = txtValorVenda.getText();
-        String valorCusto = txtValorCusto.getText();
-        boolean controlaEst;
-        if(chbEstoque.isSelected()){
-            controlaEst = true;
-        }else{
-            controlaEst = false;
+        
+        if(validardados() == true){
+            produto.setNome(txtProduto.getText());
+            produto.setDescricao(txtDescricao.getText());
+            produto.setQuantidade(Double.parseDouble(txtQuantidade.getText()));
+            produto.setEst_max(Double.parseDouble(txtEstMax.getText()));
+            produto.setEst_min(Double.parseDouble(txtEstMin.getText()));
+            produto.setComissao(Double.parseDouble(txtComissao.getText()));
+            produto.setValor_venda(Double.parseDouble(txtValorVenda.getText()));
+            produto.setValor_custo(Double.parseDouble(txtValorCusto.getText()));
+
+            Combos area = (Combos) cbAreaVenda.getSelectedItem();
+            int id_area = Integer.parseInt(area.getCodigo());
+            produto.setId_area(id_area);
+            if(chbEstoque.isSelected()){
+                produto.setControla_est(true);
+            }else{
+//                produto.setControla_est(false);
+        }
         }
         
-        int areaVenda = (int) cbAreaVenda.getSelectedIndex();
-        
         controller.controllerProduto controller = new controllerProduto();
-        boolean cadastraProduto = controller.cadastraProduto(areaVenda, produto, descricao, 
-                                                            quantidade, estMax, estMin, controlaEst, 
-                                                            comissao, valorVenda, valorCusto);
+        boolean cadastraProduto = controller.cadastraProduto(produto);
     }//GEN-LAST:event_btnCadastrarProdutoActionPerformed
 
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed

@@ -5,6 +5,12 @@
  */
 package view;
 
+import database.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joel
@@ -17,6 +23,35 @@ public class telaProduto extends javax.swing.JFrame {
     public telaProduto() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        carregaTabela();
+    }
+    private void carregaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jtProduto.getModel();
+        modelo.setNumRows(0);
+        
+        jtProduto.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jtProduto.getColumnModel().getColumn(1).setPreferredWidth(20);
+        jtProduto.getColumnModel().getColumn(2).setPreferredWidth(20);
+        
+        try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            stmt = con.prepareStatement("select nome,valor_venda, id_produto from produto");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                modelo.addRow(new Object[]{
+                    rs.getString(1),
+                    rs.getInt(2),
+                    rs.getInt(3)
+                });
+            }
+            Conexao.closeConnection(con);
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -31,13 +66,15 @@ public class telaProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnCadastraProduto = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel1.setText("Produtos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 25, 164, 58));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 164, 58));
 
         btnCadastraProduto.setText("Cadastrar Produtos");
         btnCadastraProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -45,7 +82,7 @@ public class telaProduto extends javax.swing.JFrame {
                 btnCadastraProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCadastraProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        getContentPane().add(btnCadastraProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, -1, -1));
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +90,22 @@ public class telaProduto extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, -1, -1));
+
+        jtProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Produto", "Valor", "ID"
+            }
+        ));
+        jScrollPane2.setViewportView(jtProduto);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 440, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,5 +160,7 @@ public class telaProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastraProduto;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtProduto;
     // End of variables declaration//GEN-END:variables
 }

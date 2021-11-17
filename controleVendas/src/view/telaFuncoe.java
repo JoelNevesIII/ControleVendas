@@ -61,6 +61,11 @@ public class telaFuncoe extends javax.swing.JFrame {
         });
 
         btnAtribuiFuncao.setText("Atribuir função");
+        btnAtribuiFuncao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtribuiFuncaoActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +120,11 @@ public class telaFuncoe extends javax.swing.JFrame {
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnAtribuiFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtribuiFuncaoActionPerformed
+        telaAtribuiFuncao tela = new telaAtribuiFuncao();
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnAtribuiFuncaoActionPerformed
 
     /**
      * @param args the command line arguments
