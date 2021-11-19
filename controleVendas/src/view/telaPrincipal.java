@@ -31,7 +31,7 @@ public class telaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAreaVenda = new javax.swing.JButton();
         btnFuncao = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRealizarVenda = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
@@ -69,11 +69,16 @@ public class telaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 240, 60));
 
-        jButton1.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
-        jButton1.setText("Realizar Venda");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 670, 70));
+        btnRealizarVenda.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
+        btnRealizarVenda.setText("Realizar Venda");
+        btnRealizarVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRealizarVenda.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnRealizarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarVendaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRealizarVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 670, 70));
 
         btnCliente.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
         btnCliente.setText("Cliente");
@@ -139,6 +144,11 @@ public class telaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    private void btnRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVendaActionPerformed
+        telaRealizarVenda telaRealizarVenda = new telaRealizarVenda();
+        telaRealizarVenda.setVisible(true);
+    }//GEN-LAST:event_btnRealizarVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,8 +189,8 @@ public class telaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFuncao;
     private javax.swing.JButton btnProduto;
+    private javax.swing.JButton btnRealizarVenda;
     private javax.swing.JButton btnUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
