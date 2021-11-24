@@ -284,6 +284,7 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
             controller.controllerCliente controller = new controllerCliente();
             boolean cadastraCliente = controller.cadastraEstado(estado);
             preencheEstado();
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Estado cadastrado: \n" + txtEstado.getText());
         }
     }//GEN-LAST:event_btnCadastraEstadoActionPerformed
 
@@ -304,7 +305,8 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
             cidade.setId_estado(idestado);
             controller.controllerCliente controller = new controllerCliente(); 
             boolean controllerCliente = controller.cadastraCidade(cidade);
-            preencheCidades(); 
+            preencheCidades();
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade cadastrada: \n" + txtCidade.getText());
         }
     }//GEN-LAST:event_btnCadastraCidadeActionPerformed
 
@@ -318,6 +320,7 @@ public class telaCadastraEndereco extends javax.swing.JFrame {
 
             controller.controllerCliente controller = new controllerCliente(); 
             boolean controllerCliente = controller.cadastraBairro(bairro);
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Bairro cadastrado: \n" + txtBairro.getText());
         }
     }//GEN-LAST:event_btnCadastraBairroActionPerformed
 

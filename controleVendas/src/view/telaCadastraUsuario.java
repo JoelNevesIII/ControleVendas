@@ -161,6 +161,7 @@ public class telaCadastraUsuario extends javax.swing.JFrame {
             
             controller.controllerUsuario controller = new controllerUsuario();
             boolean cadastraUsuario = controller.cadastraUsuario(usuario);
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario cadastrado: \n" + txtUsuario.getText());
         }
         }catch(Exception e){
             

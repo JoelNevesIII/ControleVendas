@@ -148,6 +148,7 @@ public class telaAtribuiFuncao extends javax.swing.JFrame {
             
             controller.controllerFuncao controller = new controllerFuncao();
             boolean cadastraUsuario = controller.atribuiFuncao(atribui);
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Função alterada");
         }
     }//GEN-LAST:event_btnAtribuiFuncaoActionPerformed
 

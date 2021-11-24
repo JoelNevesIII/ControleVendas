@@ -324,6 +324,7 @@ public class telaCadastraProduto extends javax.swing.JFrame {
             }else{
 //                produto.setControla_est(false);
         }
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Produto cadastrado: \n" + txtProduto.getText());
         }
         
         controller.controllerProduto controller = new controllerProduto();

@@ -126,7 +126,7 @@ public class telaCadastraAreaVenda extends javax.swing.JFrame {
             area.setNome(txtAreaVenda.getText().trim());
             controller.controllerAreaVenda controller = new controllerAreaVenda();
             boolean cadastrado = controller.CadastraAreaVenda(area);
-            txtAviso.setText("Area de venda cadastrada");
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Area de Venda cadastrada: \n" + txtAreaVenda.getText());
             txtAreaVenda.setText("");
         } 
     }//GEN-LAST:event_btnCadastraAreaVendaActionPerformed

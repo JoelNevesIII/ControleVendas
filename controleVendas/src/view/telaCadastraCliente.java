@@ -320,6 +320,7 @@ public class telaCadastraCliente extends javax.swing.JFrame {
                 
                  cliente.setCpf(txtCpf.getText());
                  cliente.setCnpj(txtCnpj.getText());
+                 CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente cadastrado: \n" + txtNome.getText());
             }
                
             controller.controllerCliente controller = new controllerCliente();
