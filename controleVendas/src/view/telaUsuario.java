@@ -5,6 +5,12 @@
  */
 package view;
 
+import database.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joel
@@ -17,6 +23,32 @@ public class telaUsuario extends javax.swing.JFrame {
     public telaUsuario() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        carregaTabela();
+    }
+    private void carregaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
+        modelo.setNumRows(0);
+        
+        jtClientes.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jtClientes.getColumnModel().getColumn(1).setPreferredWidth(20);
+            try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            stmt = con.prepareStatement("select id_usuario, nome from usuario");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                modelo.addRow(new Object[]{
+                    rs.getInt(1),
+                    rs.getString(2),
+                });
+            }
+            Conexao.closeConnection(con);
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -31,13 +63,15 @@ public class telaUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnCadastraUsuario = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel1.setText("Usuarios");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
 
         btnCadastraUsuario.setText("Cadastrar usuário");
         btnCadastraUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -45,7 +79,7 @@ public class telaUsuario extends javax.swing.JFrame {
                 btnCadastraUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCadastraUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        getContentPane().add(btnCadastraUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, -1, -1));
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +87,26 @@ public class telaUsuario extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 510, -1, -1));
+
+        jtClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Usuário"
+            }
+        ));
+        jScrollPane1.setViewportView(jtClientes);
+        if (jtClientes.getColumnModel().getColumnCount() > 0) {
+            jtClientes.getColumnModel().getColumn(0).setMinWidth(60);
+            jtClientes.getColumnModel().getColumn(0).setMaxWidth(60);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,5 +161,7 @@ public class telaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastraUsuario;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtClientes;
     // End of variables declaration//GEN-END:variables
 }

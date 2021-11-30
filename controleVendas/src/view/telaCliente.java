@@ -5,6 +5,12 @@
  */
 package view;
 
+import database.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joel
@@ -17,6 +23,35 @@ public class telaCliente extends javax.swing.JFrame {
     public telaCliente() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        carregaTabela();
+    }
+    private void carregaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
+        modelo.setNumRows(0);
+        
+        jtClientes.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jtClientes.getColumnModel().getColumn(1).setPreferredWidth(20); 
+        jtClientes.getColumnModel().getColumn(1).setPreferredWidth(20); 
+        try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            stmt = con.prepareStatement("select c.id_cliente, c.nome, e.nome_estado from cliente c, estado e\n" +
+                                        "where c.id_estado = e.id_estado");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                modelo.addRow(new Object[]{
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                });
+            }
+            Conexao.closeConnection(con);
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -32,11 +67,15 @@ public class telaCliente extends javax.swing.JFrame {
         btnCadastraCliente = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnCadastraEndereco = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel1.setText("Cliente");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, -1));
 
         btnCadastraCliente.setText("Cadastra Cliente");
         btnCadastraCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -44,6 +83,7 @@ public class telaCliente extends javax.swing.JFrame {
                 btnCadastraClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCadastraCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 133, -1));
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +91,7 @@ public class telaCliente extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 540, -1, -1));
 
         btnCadastraEndereco.setText("Cadastra endereços");
         btnCadastraEndereco.addActionListener(new java.awt.event.ActionListener() {
@@ -58,40 +99,26 @@ public class telaCliente extends javax.swing.JFrame {
                 btnCadastraEnderecoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCadastraEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 490, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCadastraEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCadastraCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(153, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(32, 32, 32))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastraCliente)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastraEndereco)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(22, 22, 22))
-        );
+        jtClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Cliente", "Estado"
+            }
+        ));
+        jScrollPane1.setViewportView(jtClientes);
+        if (jtClientes.getColumnModel().getColumnCount() > 0) {
+            jtClientes.getColumnModel().getColumn(0).setMinWidth(60);
+            jtClientes.getColumnModel().getColumn(0).setMaxWidth(60);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,5 +179,7 @@ public class telaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastraEndereco;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtClientes;
     // End of variables declaration//GEN-END:variables
 }

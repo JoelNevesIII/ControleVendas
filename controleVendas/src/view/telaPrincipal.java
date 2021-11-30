@@ -5,6 +5,9 @@
  */
 package view;
 
+import controller.controllerNota;
+import model.modelNota;
+
 /**
  *
  * @author Joel
@@ -35,7 +38,7 @@ public class telaPrincipal extends javax.swing.JFrame {
         btnCliente = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnRelatorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -107,9 +110,14 @@ public class telaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 330, 240, 60));
 
-        jButton5.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
-        jButton5.setText("Verificar Nota");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, 60));
+        btnRelatorios.setFont(new java.awt.Font("Nirmala UI", 0, 24)); // NOI18N
+        btnRelatorios.setText("Relatórios");
+        btnRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatoriosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, 60));
 
         setBounds(0, 0, 1301, 637);
     }// </editor-fold>//GEN-END:initComponents
@@ -145,9 +153,17 @@ public class telaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVendaActionPerformed
+        model.modelNota nota = new modelNota();
+        controller.controllerNota controller = new controllerNota();
+        boolean cadastraNota = controller.CadastraNota(nota);
         telaRealizarVenda telaRealizarVenda = new telaRealizarVenda();
         telaRealizarVenda.setVisible(true);
     }//GEN-LAST:event_btnRealizarVendaActionPerformed
+
+    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
+        telaRelatorios telaRelatorios = new telaRelatorios();
+        telaRelatorios.setVisible(true);
+    }//GEN-LAST:event_btnRelatoriosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,8 +206,8 @@ public class telaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnFuncao;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnRealizarVenda;
+    private javax.swing.JButton btnRelatorios;
     private javax.swing.JButton btnUsuario;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -85,7 +85,7 @@ public class Combos {
         cbCombo.removeAllItems();
 
         Combos combo = new Combos();
-        combo.setCodigo("");
+        combo.setCodigo("0");
         combo.setDescricao("Selecione...");
         cbCombo.addItem(combo);
         while (result.next()) {

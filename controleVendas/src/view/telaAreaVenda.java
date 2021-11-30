@@ -5,6 +5,12 @@
  */
 package view;
 
+import database.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joel
@@ -17,6 +23,32 @@ public class telaAreaVenda extends javax.swing.JFrame {
     public telaAreaVenda() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        carregaTabela();
+    }
+    private void carregaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jtAreaVenda.getModel();
+        modelo.setNumRows(0);
+        
+        jtAreaVenda.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jtAreaVenda.getColumnModel().getColumn(1).setPreferredWidth(20);       
+        try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            stmt = con.prepareStatement("select id_area,nome from area_venda");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                modelo.addRow(new Object[]{
+                    rs.getInt(1),
+                    rs.getString(2),
+                });
+            }
+            Conexao.closeConnection(con);
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -31,13 +63,17 @@ public class telaAreaVenda extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnCadastraAreaVenda = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtAreaVenda = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Area Vendas");
         jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -45,6 +81,7 @@ public class telaAreaVenda extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 480, -1, -1));
 
         btnCadastraAreaVenda.setText("Cadastrar area de venda");
         btnCadastraAreaVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -52,33 +89,26 @@ public class telaAreaVenda extends javax.swing.JFrame {
                 btnCadastraAreaVendaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCadastraAreaVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCadastraAreaVenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(34, 34, 34))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(127, 127, 127))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastraAreaVenda)
-                    .addComponent(btnVoltar))
-                .addContainerGap(455, Short.MAX_VALUE))
-        );
+        jtAreaVenda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Area de Venda"
+            }
+        ));
+        jScrollPane1.setViewportView(jtAreaVenda);
+        if (jtAreaVenda.getColumnModel().getColumnCount() > 0) {
+            jtAreaVenda.getColumnModel().getColumn(0).setMinWidth(60);
+            jtAreaVenda.getColumnModel().getColumn(0).setMaxWidth(60);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,5 +163,7 @@ public class telaAreaVenda extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastraAreaVenda;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtAreaVenda;
     // End of variables declaration//GEN-END:variables
 }

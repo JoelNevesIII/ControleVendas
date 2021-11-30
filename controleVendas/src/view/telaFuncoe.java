@@ -5,6 +5,12 @@
  */
 package view;
 
+import database.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joel
@@ -17,6 +23,32 @@ public class telaFuncoe extends javax.swing.JFrame {
     public telaFuncoe() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        carregaTabela();
+    }
+    private void carregaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jtFuncao.getModel();
+        modelo.setNumRows(0);
+        
+        jtFuncao.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jtFuncao.getColumnModel().getColumn(1).setPreferredWidth(20);       
+        try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+            
+            stmt = con.prepareStatement("select id_funcao, funcao from funcao");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                modelo.addRow(new Object[]{
+                    rs.getInt(1),
+                    rs.getString(2),
+                });
+            }
+            Conexao.closeConnection(con);
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -29,29 +61,18 @@ public class telaFuncoe extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btnCadastraFuncao = new javax.swing.JButton();
         btnAtribuiFuncao = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtFuncao = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel1.setText("Funções");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         btnCadastraFuncao.setText("Cadastrar função");
         btnCadastraFuncao.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +80,7 @@ public class telaFuncoe extends javax.swing.JFrame {
                 btnCadastraFuncaoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCadastraFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, -1, -1));
 
         btnAtribuiFuncao.setText("Atribuir função");
         btnAtribuiFuncao.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +88,7 @@ public class telaFuncoe extends javax.swing.JFrame {
                 btnAtribuiFuncaoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAtribuiFuncao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 530, -1, -1));
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,39 +96,26 @@ public class telaFuncoe extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 580, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(129, 129, 129))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCadastraFuncao)
-                .addGap(41, 41, 41)
-                .addComponent(btnAtribuiFuncao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastraFuncao)
-                    .addComponent(btnAtribuiFuncao)
-                    .addComponent(btnVoltar))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
+        jtFuncao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Função"
+            }
+        ));
+        jScrollPane1.setViewportView(jtFuncao);
+        if (jtFuncao.getColumnModel().getColumnCount() > 0) {
+            jtFuncao.getColumnModel().getColumn(0).setMinWidth(60);
+            jtFuncao.getColumnModel().getColumn(0).setMaxWidth(60);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +177,6 @@ public class telaFuncoe extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtFuncao;
     // End of variables declaration//GEN-END:variables
 }

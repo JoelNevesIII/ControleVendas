@@ -11,6 +11,7 @@ public class modelNotaProduto {
     private int quantidade;
     private double valor_vendido;
     private int id_vendedor;
+    private int valor_total;
 
     public int getId_produto() {
         return id_produto;
@@ -51,6 +52,18 @@ public class modelNotaProduto {
     public void setId_vendedor(int id_vendedor) {
         this.id_vendedor = id_vendedor;
     }
-    
-    
+
+    public int getValor_total() {
+        return valor_total;
+    }
+
+    public void setValor_total(int valor_total) {
+        this.valor_total = valor_total;
+    }
+
+    public void getValor_total(int parseInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+
+    

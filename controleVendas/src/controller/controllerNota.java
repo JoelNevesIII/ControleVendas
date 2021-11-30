@@ -22,8 +22,27 @@ public class controllerNota {
             
             String wSQL = "insert into nota values (default, ?) ";
             stmt = con.prepareStatement(wSQL);
-            stmt.setInt(1, nota.getId_cliente());    
+            stmt.setNull(1, 0);    
+            stmt.executeUpdate();
+            return true;
+        }catch(SQLException ex){
+            System.out.println("ERRO de SQL: " + ex.getMessage());
+            return false;
+        }
+        catch (Exception e) {
+           System.out.println("ERRO: " + e.getMessage());
+           return false;
+        }    
+    }
+    public boolean AlteraNota(modelNota nota){
+        try{
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
             
+            String wSQL = "update nota set id_cliente = ? where id_nota = (SELECT Max(id_nota) FROM nota) ";
+            stmt = con.prepareStatement(wSQL);
+            stmt.setInt(1, nota.getId_cliente());    
             stmt.executeUpdate();
             return true;
         }catch(SQLException ex){
@@ -36,3 +55,4 @@ public class controllerNota {
         }    
     } 
 }
+
