@@ -32,26 +32,26 @@ public class telaRealizarVenda extends javax.swing.JFrame {
      */
     public telaRealizarVenda() {
         try{
-        initComponents();
-        txtQuantidade.setDocument(new controller.controllerNumeros());
-        carregaTabelaProduto("");
-        carregaTabelaCliente("");
-        carregaNotaProduto(0);
-        Combos comboVendedor;
-        Connection con = Conexao.getConnection();
-        ResultSet rs = null;
-        PreparedStatement stmt = null;
-            
-        stmt = con.prepareStatement("SELECT Max(id_nota) FROM nota");
-        
-        rs = stmt.executeQuery();
-        while(rs.next()){
-            txtId.setText(rs.getString(1));
-        }
-            comboVendedor = new Combos(cbVendedor);
-            comboVendedor.preencheCombo("select u.id_usuario, u.nome from usuario u, funcao f\n" +
-                                        "where f.id_funcao = u.id_funcao and f.funcao_venda = true");
-            
+            initComponents();
+            txtQuantidade.setDocument(new controller.controllerNumeros());
+            carregaTabelaProduto("");
+            carregaTabelaCliente("");
+            carregaNotaProduto(0);
+            Combos comboVendedor;
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement stmt = null;
+
+            stmt = con.prepareStatement("SELECT Max(id_nota) FROM nota");
+
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                txtId.setText(rs.getString(1));
+            }
+                comboVendedor = new Combos(cbVendedor);
+                comboVendedor.preencheCombo("select u.id_usuario, u.nome from usuario u, funcao f\n" +
+                                            "where f.id_funcao = u.id_funcao and f.funcao_venda = true");
+
         }catch(Exception e){
             
         }
@@ -67,6 +67,7 @@ public class telaRealizarVenda extends javax.swing.JFrame {
         if(txtQuantidade.getText().trim().equals("")){
             erro += "Defina uma Quantidade \n";
         }
+        
         if(erro != ""){
             CaixaDeDialogo.obterinstancia().exibirMensagem("" + erro);
             return false;
@@ -465,7 +466,6 @@ public class telaRealizarVenda extends javax.swing.JFrame {
             ResultSet rs = null;
             PreparedStatement stmt = null;
             PreparedStatement stmt2 = null;
-            
             stmt = con.prepareStatement("DELETE FROM produto_nota WHERE id_nota = " + txtId.getText() + ";\n" +
                                         "DELETE FROM nota WHERE id_nota = " + txtId.getText());
             rs = stmt.executeQuery();
@@ -510,6 +510,7 @@ public class telaRealizarVenda extends javax.swing.JFrame {
         try{
         modelNotaProduto notaProduto = new modelNotaProduto();
         if(validardados()){
+            
             modelNota nota = new modelNota();
             int cliente = jtClientes.getSelectedRow();
             String id_cliente = jtClientes.getModel().getValueAt(cliente, 2).toString();
@@ -545,20 +546,30 @@ public class telaRealizarVenda extends javax.swing.JFrame {
             ResultSet rs = null;
             PreparedStatement stmt = null;
             stmt = con.prepareStatement("select valor_venda from produto where id_produto = " + id_produto);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                notaProduto.setValor_vendido(rs.getInt(1));
+            }   
+
+            double est_min = 0;
+            int quantidade = 0;
+            boolean controla = true; 
+            stmt = con.prepareStatement("select quantidade, est_min, controla_est from produto\n" +
+                                        "where id_produto = " + id_produto);
 
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                notaProduto.setValor_vendido(rs.getInt(1));
+                quantidade = (rs.getInt(1));
+                est_min = (rs.getDouble(2));  
+                controla = (rs.getBoolean(3));
             }
-            
+
         }
         
             controller.controllerRealizarVenda controller = new controller.controllerRealizarVenda();
             boolean RealizarVenda = controller.CadastraVenda(notaProduto);
             
-            
-
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement stmt = null;
@@ -586,6 +597,7 @@ public class telaRealizarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_cbVendedorActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        
         telaTroco telaTroco = new telaTroco();
         telaTroco.setVisible(true);
         dispose();
